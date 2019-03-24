@@ -18,11 +18,7 @@ defmodule Islands.GuessesTest do
     {:ok, coords: coords, guesses: guesses}
   end
 
-  describe "Guesses.new/0" do
-    test "returns a struct" do
-      assert %Guesses{hits: _hits, misses: _misses} = Guesses.new()
-    end
-
+  describe "A guesses struct" do
     test "can be encoded by Poison", %{guesses: guesses} do
       assert Poison.encode!(guesses) ==
                ~s<{\"misses\":[],\"hits\":[{\"row\":1,\"col\":1},{\"row\":2,\"col\":2}]}>
@@ -31,6 +27,12 @@ defmodule Islands.GuessesTest do
     test "can be encoded by Jason", %{guesses: guesses} do
       assert Jason.encode!(guesses) ==
                ~s<{\"hits\":[{\"col\":1,\"row\":1},{\"col\":2,\"row\":2}],\"misses\":[]}>
+    end
+  end
+
+  describe "Guesses.new/0" do
+    test "returns a struct" do
+      assert %Guesses{hits: _hits, misses: _misses} = Guesses.new()
     end
   end
 
