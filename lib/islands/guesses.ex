@@ -2,6 +2,8 @@
 # │ Based on the book "Functional Web Development" by Lance Halvorsen. │
 # └────────────────────────────────────────────────────────────────────┘
 defmodule Islands.Guesses do
+  use PersistConfig
+
   @book_ref Application.get_env(@app, :book_ref)
 
   @moduledoc """
