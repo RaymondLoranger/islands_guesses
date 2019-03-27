@@ -33,12 +33,12 @@ defmodule Islands.GuessesTest do
   end
 
   describe "A guesses struct" do
-    test "can be encoded/decoded by Poison", %{guesses: guesses, json: json} do
+    test "can be encoded by Poison", %{guesses: guesses, json: json} do
       assert Poison.encode!(guesses) == json.poison
       assert Poison.decode!(json.poison) == json.decoded
     end
 
-    test "can be encoded/decoded by Jason", %{guesses: guesses, json: json} do
+    test "can be encoded by Jason", %{guesses: guesses, json: json} do
       assert Jason.encode!(guesses) == json.jason
       assert Jason.decode!(json.jason) == json.decoded
     end
