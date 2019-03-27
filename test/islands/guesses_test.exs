@@ -15,18 +15,32 @@ defmodule Islands.GuessesTest do
       |> Guesses.add(:hit, coords.one)
       |> Guesses.add(:hit, coords.two)
 
-    {:ok, coords: coords, guesses: guesses}
+    poison =
+      ~s<{\"misses\":[],\"hits\":[{\"row\":1,\"col\":1},{\"row\":2,\"col\":2}]}>
+
+    jason =
+      ~s<{\"hits\":[{\"col\":1,\"row\":1},{\"col\":2,\"row\":2}],\"misses\":[]}>
+
+    decoded = %{
+      "hits" => [%{"col" => 1, "row" => 1}, %{"col" => 2, "row" => 2}],
+      "misses" => []
+    }
+
+    {:ok,
+     json: %{poison: poison, jason: jason, decoded: decoded},
+     coords: coords,
+     guesses: guesses}
   end
 
   describe "A guesses struct" do
-    test "can be encoded by Poison", %{guesses: guesses} do
-      assert Poison.encode!(guesses) ==
-               ~s<{\"misses\":[],\"hits\":[{\"row\":1,\"col\":1},{\"row\":2,\"col\":2}]}>
+    test "can be encoded/decoded by Poison", %{guesses: guesses, json: json} do
+      assert Poison.encode!(guesses) == json.poison
+      assert Poison.decode!(json.poison) == json.decoded
     end
 
-    test "can be encoded by Jason", %{guesses: guesses} do
-      assert Jason.encode!(guesses) ==
-               ~s<{\"hits\":[{\"col\":1,\"row\":1},{\"col\":2,\"row\":2}],\"misses\":[]}>
+    test "can be encoded/decoded by Jason", %{guesses: guesses, json: json} do
+      assert Jason.encode!(guesses) == json.jason
+      assert Jason.decode!(json.jason) == json.decoded
     end
   end
 
