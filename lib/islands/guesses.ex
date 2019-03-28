@@ -37,4 +37,10 @@ defmodule Islands.Guesses do
   end
 
   def add(_guesses, _type, _guess), do: {:error, :invalid_guesses_args}
+
+  @spec hits(t) :: non_neg_integer
+  def hits(%Guesses{hits: hits} = _guesses), do: MapSet.size(hits)
+
+  @spec misses(t) :: non_neg_integer
+  def misses(%Guesses{misses: misses} = _guesses), do: MapSet.size(misses)
 end
