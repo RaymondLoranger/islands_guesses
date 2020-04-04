@@ -15,11 +15,16 @@ defmodule Islands.GuessesTest do
       |> Guesses.add(:hit, coords.one)
       |> Guesses.add(:hit, coords.two)
 
-    poison =
-      ~s<{\"misses\":[],\"hits\":[{\"row\":1,\"col\":1},{\"row\":2,\"col\":2}]}>
+    {:ok, square_70} = Coord.new(7, 10)
+    {:ok, square_84} = Coord.new(9, 4)
+    misses = %{square_70: square_70, square_84: square_84}
 
-    jason =
-      ~s<{\"hits\":[{\"col\":1,\"row\":1},{\"col\":2,\"row\":2}],\"misses\":[]}>
+    {:ok, square_24} = Coord.new(3, 4)
+    {:ok, square_25} = Coord.new(3, 5)
+    hits = %{square_24: square_24, square_25: square_25}
+
+    poison = ~s<{"misses":[],"hits":[{"row":1,"col":1},{"row":2,"col":2}]}>
+    jason = ~s<{"hits":[{"col":1,"row":1},{"col":2,"row":2}],"misses":[]}>
 
     decoded = %{
       "hits" => [%{"col" => 1, "row" => 1}, %{"col" => 2, "row" => 2}],
@@ -29,7 +34,9 @@ defmodule Islands.GuessesTest do
     {:ok,
      json: %{poison: poison, jason: jason, decoded: decoded},
      coords: coords,
-     guesses: guesses}
+     guesses: guesses,
+     misses: misses,
+     hits: hits}
   end
 
   describe "A guesses struct" do
@@ -81,6 +88,34 @@ defmodule Islands.GuessesTest do
 
       assert Guesses.new() |> Guesses.add(:hit, {1, 1}) ==
                {:error, :invalid_guesses_args}
+    end
+  end
+
+  describe "Guesses.hit_squares/1" do
+    test "returns a map of square numbers", %{hits: hits} do
+      guesses =
+        Guesses.new()
+        |> Guesses.add(:hit, hits.square_24)
+        |> Guesses.add(:hit, hits.square_25)
+
+      assert Guesses.hit_squares(guesses) in [
+               %{squares: [24, 25]},
+               %{squares: [25, 24]}
+             ]
+    end
+  end
+
+  describe "Guesses.miss_squares/1" do
+    test "returns a map of square numbers", %{misses: misses} do
+      guesses =
+        Guesses.new()
+        |> Guesses.add(:miss, misses.square_70)
+        |> Guesses.add(:miss, misses.square_84)
+
+      assert Guesses.miss_squares(guesses) in [
+               %{squares: [70, 84]},
+               %{squares: [84, 70]}
+             ]
     end
   end
 end

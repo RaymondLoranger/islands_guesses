@@ -37,4 +37,14 @@ defmodule Islands.Guesses do
   end
 
   def add(_guesses, _type, _guess), do: {:error, :invalid_guesses_args}
+
+  @spec hit_squares(t) :: %{:squares => [Coord.square()]}
+  def hit_squares(%Guesses{hits: hits} = _guesses) do
+    %{squares: Enum.map(hits, &Coord.to_square/1)}
+  end
+
+  @spec miss_squares(t) :: %{:squares => [Coord.square()]}
+  def miss_squares(%Guesses{misses: misses} = _guesses) do
+    %{squares: Enum.map(misses, &Coord.to_square/1)}
+  end
 end
