@@ -31,12 +31,13 @@ defmodule Islands.GuessesTest do
       "misses" => []
     }
 
-    {:ok,
-     json: %{poison: poison, jason: jason, decoded: decoded},
-     coords: coords,
-     guesses: guesses,
-     misses: misses,
-     hits: hits}
+    %{
+      json: %{poison: poison, jason: jason, decoded: decoded},
+      coords: coords,
+      guesses: guesses,
+      misses: misses,
+      hits: hits
+    }
   end
 
   describe "A guesses struct" do
