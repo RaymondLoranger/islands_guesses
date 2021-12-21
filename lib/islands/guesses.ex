@@ -37,7 +37,7 @@ defmodule Islands.Guesses do
   def new, do: %Guesses{hits: MapSet.new(), misses: MapSet.new()}
 
   @doc """
-  Adds a hit `guess` to the :hit set or a miss `guess` to the :misses set.
+  Adds a hit `guess` to the :hits set or a miss `guess` to the :misses set.
   """
   @spec add(t, type, Coord.t()) :: t | {:error, atom}
   def add(guesses, type, guess)
