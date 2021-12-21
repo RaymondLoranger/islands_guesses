@@ -3,7 +3,10 @@
 # └────────────────────────────────────────────────────────────────────┘
 defmodule Islands.Guesses do
   @moduledoc """
-  Creates a `guesses` struct for the _Game of Islands_.
+  A `guesses` struct and functions for the _Game of Islands_.
+
+  The `guesses` struct contains the fields hits and misses
+  classifying a player's guesses in the _Game of Islands_.
 
   ##### Based on the book [Functional Web Development](https://pragprog.com/book/lhelph/functional-web-development-with-elixir-otp-and-phoenix) by Lance Halvorsen.
   """
@@ -19,9 +22,23 @@ defmodule Islands.Guesses do
   @type t :: %Guesses{hits: Island.coords(), misses: Island.coords()}
   @type type :: :hit | :miss
 
+  @doc """
+  Creates a new `guesses` struct.
+
+  ## Examples
+
+      iex> Islands.Guesses.new()
+      %Islands.Guesses{
+        hits: MapSet.new(),
+        misses: MapSet.new()
+      }
+  """
   @spec new :: t
   def new, do: %Guesses{hits: MapSet.new(), misses: MapSet.new()}
 
+  @doc """
+  Adds a hit `guess` to the :hit set or a miss `guess` to the :misses set.
+  """
   @spec add(t, type, Coord.t()) :: t | {:error, atom}
   def add(guesses, type, guess)
 
@@ -35,11 +52,19 @@ defmodule Islands.Guesses do
 
   def add(_guesses, _type, _guess), do: {:error, :invalid_guesses_args}
 
+  @doc """
+  Returns a map assigning to :squares the list of square numbers
+  for the `guesses`'s hits.
+  """
   @spec hit_squares(t) :: %{:squares => [Coord.square()]}
   def hit_squares(%Guesses{hits: hits} = _guesses) do
     %{squares: Enum.map(hits, &Coord.to_square/1)}
   end
 
+  @doc """
+  Returns a map assigning to :squares the list of square numbers
+  for the `guesses`'s misses.
+  """
   @spec miss_squares(t) :: %{:squares => [Coord.square()]}
   def miss_squares(%Guesses{misses: misses} = _guesses) do
     %{squares: Enum.map(misses, &Coord.to_square/1)}

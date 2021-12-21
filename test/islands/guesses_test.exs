@@ -83,7 +83,7 @@ defmodule Islands.GuessesTest do
       assert MapSet.size(guesses.misses) == 2
     end
 
-    test "returns {:error, ...} given bad args", %{coords: coords} do
+    test "returns {:error, reason} given bad args", %{coords: coords} do
       assert Guesses.new() |> Guesses.add(:what, coords.one) ==
                {:error, :invalid_guesses_args}
 

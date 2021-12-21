@@ -4,7 +4,7 @@ defmodule Islands.Guesses.MixProject do
   def project do
     [
       app: :islands_guesses,
-      version: "0.1.20",
+      version: "0.1.21",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Islands Guesses",
@@ -21,7 +21,7 @@ defmodule Islands.Guesses.MixProject do
 
   defp description do
     """
-    Creates a guesses struct for the Game of Islands.
+    A guesses struct and functions for the Game of Islands.
     """
   end
 
@@ -49,7 +49,7 @@ defmodule Islands.Guesses.MixProject do
       {:islands_coord, "~> 0.1"},
       {:islands_island, "~> 0.1"},
       {:jason, "~> 1.0"},
-      {:poison, "~> 4.0"}
+      {:poison, "~> 5.0"}
     ]
   end
 end
