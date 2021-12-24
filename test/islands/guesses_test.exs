@@ -53,13 +53,13 @@ defmodule Islands.GuessesTest do
   end
 
   describe "Guesses.new/0" do
-    test "returns a struct" do
+    test "returns a guesses struct" do
       assert %Guesses{hits: _hits, misses: _misses} = Guesses.new()
     end
   end
 
   describe "Guesses.add/3" do
-    test "adds hits ensuring uniqueness", %{coords: coords} do
+    test "adds new hits only ensuring uniqueness", %{coords: coords} do
       guesses =
         Guesses.new()
         |> Guesses.add(:hit, coords.one)
@@ -71,7 +71,7 @@ defmodule Islands.GuessesTest do
       assert MapSet.size(guesses.hits) == 2
     end
 
-    test "adds misses ensuring uniqueness", %{coords: coords} do
+    test "adds new misses only ensuring uniqueness", %{coords: coords} do
       guesses =
         Guesses.new()
         |> Guesses.add(:miss, coords.one)

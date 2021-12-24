@@ -3,10 +3,10 @@
 # └────────────────────────────────────────────────────────────────────┘
 defmodule Islands.Guesses do
   @moduledoc """
-  A `guesses` struct and functions for the _Game of Islands_.
+  A guesses struct and functions for the _Game of Islands_.
 
-  The `guesses` struct contains the fields hits and misses
-  classifying a player's guesses in the _Game of Islands_.
+  The guesses struct contains the fields `hits` and `misses` representing the
+  guesses of an opponent in the _Game of Islands_.
 
   ##### Based on the book [Functional Web Development](https://pragprog.com/book/lhelph/functional-web-development-with-elixir-otp-and-phoenix) by Lance Halvorsen.
   """
@@ -23,7 +23,7 @@ defmodule Islands.Guesses do
   @type type :: :hit | :miss
 
   @doc """
-  Creates a new `guesses` struct.
+  Creates a new guesses struct.
 
   ## Examples
 
@@ -37,7 +37,7 @@ defmodule Islands.Guesses do
   def new, do: %Guesses{hits: MapSet.new(), misses: MapSet.new()}
 
   @doc """
-  Adds a hit `guess` to the :hits set or a miss `guess` to the :misses set.
+  Adds a hit `guess` to the `:hits` set or a miss `guess` to the `:misses` set.
   """
   @spec add(t, type, Coord.t()) :: t | {:error, atom}
   def add(guesses, type, guess)
