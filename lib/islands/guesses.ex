@@ -54,7 +54,7 @@ defmodule Islands.Guesses do
 
   @doc """
   Returns a map assigning to :squares the list of square numbers
-  for the `guesses`'s hits.
+  from the `guesses`'s hits.
   """
   @spec hit_squares(t) :: %{:squares => [Coord.square()]}
   def hit_squares(%Guesses{hits: hits} = _guesses) do
@@ -63,7 +63,7 @@ defmodule Islands.Guesses do
 
   @doc """
   Returns a map assigning to :squares the list of square numbers
-  for the `guesses`'s misses.
+  from the `guesses`'s misses.
   """
   @spec miss_squares(t) :: %{:squares => [Coord.square()]}
   def miss_squares(%Guesses{misses: misses} = _guesses) do
