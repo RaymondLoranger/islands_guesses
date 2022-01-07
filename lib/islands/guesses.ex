@@ -19,7 +19,9 @@ defmodule Islands.Guesses do
   @enforce_keys [:hits, :misses]
   defstruct [:hits, :misses]
 
+  @typedoc "A guesses struct for the Game of Islands"
   @type t :: %Guesses{hits: Island.coords(), misses: Island.coords()}
+  @typedoc "Type of guess"
   @type type :: :hit | :miss
 
   @doc """
