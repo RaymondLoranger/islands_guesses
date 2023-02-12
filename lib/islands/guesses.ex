@@ -8,7 +8,7 @@ defmodule Islands.Guesses do
   The guesses struct contains the fields `hits` and `misses` representing the
   guesses of an opponent in the _Game of Islands_.
 
-  ##### Based on the book [Functional Web Development](https://pragprog.com/book/lhelph/functional-web-development-with-elixir-otp-and-phoenix) by Lance Halvorsen.
+  ##### Based on the book [Functional Web Development](https://pragprog.com/titles/lhelph/functional-web-development-with-elixir-otp-and-phoenix/) by Lance Halvorsen.
   """
 
   alias __MODULE__
