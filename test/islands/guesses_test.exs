@@ -23,8 +23,8 @@ defmodule Islands.GuessesTest do
     {:ok, square_25} = Coord.new(3, 5)
     hits = %{square_24: square_24, square_25: square_25}
 
-    poison = ~s<{"misses":[],"hits":[{"row":1,"col":1},{"row":2,"col":2}]}>
-    jason = ~s<{"hits":[{"col":1,"row":1},{"col":2,"row":2}],"misses":[]}>
+    poison = ~s<{"hits":[{"row":1,"col":1},{"row":2,"col":2}],"misses":[]}>
+    jason = ~s<{"hits":[{"row":1,"col":1},{"row":2,"col":2}],"misses":[]}>
 
     decoded = %{
       "hits" => [%{"col" => 1, "row" => 1}, %{"col" => 2, "row" => 2}],
