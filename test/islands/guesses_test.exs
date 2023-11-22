@@ -23,7 +23,6 @@ defmodule Islands.GuessesTest do
     {:ok, square_25} = Coord.new(3, 5)
     hits = %{square_24: square_24, square_25: square_25}
 
-    poison = ~s<{"hits":[{"row":1,"col":1},{"row":2,"col":2}],"misses":[]}>
     jason = ~s<{"hits":[{"row":1,"col":1},{"row":2,"col":2}],"misses":[]}>
 
     decoded = %{
@@ -32,7 +31,7 @@ defmodule Islands.GuessesTest do
     }
 
     %{
-      json: %{poison: poison, jason: jason, decoded: decoded},
+      json: %{jason: jason, decoded: decoded},
       coords: coords,
       guesses: guesses,
       misses: misses,
@@ -41,11 +40,6 @@ defmodule Islands.GuessesTest do
   end
 
   describe "A guesses struct" do
-    test "can be encoded by Poison", %{guesses: guesses, json: json} do
-      assert Poison.encode!(guesses) == json.poison
-      assert Poison.decode!(json.poison) == json.decoded
-    end
-
     test "can be encoded by Jason", %{guesses: guesses, json: json} do
       assert Jason.encode!(guesses) == json.jason
       assert Jason.decode!(json.jason) == json.decoded

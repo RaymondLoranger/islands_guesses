@@ -14,7 +14,6 @@ defmodule Islands.Guesses do
   alias __MODULE__
   alias Islands.{Coord, Island}
 
-  @derive [Poison.Encoder]
   @derive Jason.Encoder
   @enforce_keys [:hits, :misses]
   defstruct [:hits, :misses]
