@@ -5,8 +5,12 @@ defmodule Islands.Guesses do
   @moduledoc """
   A guesses struct and functions for the _Game of Islands_.
 
-  The guesses struct contains the fields `hits` and `misses` representing the
-  guesses of an opponent in the _Game of Islands_.
+  The guesses struct contains the fields:
+
+    - `hits`
+    - `misses`
+
+  representing the guesses of an opponent in the _Game of Islands_.
 
   ##### Based on the book [Functional Web Development](https://pragprog.com/titles/lhelph/functional-web-development-with-elixir-otp-and-phoenix/) by Lance Halvorsen.
   """
@@ -28,12 +32,11 @@ defmodule Islands.Guesses do
 
   ## Examples
 
-      iex> Islands.Guesses.new()
-      %Islands.Guesses{
-        hits: MapSet.new(),
-        misses: MapSet.new()
-      }
+      iex> alias Islands.Guesses
+      iex> Guesses.new()
+      %Guesses{hits: MapSet.new(), misses: MapSet.new()}
   """
+  @dialyzer {:no_opaque, [new: 0]}
   @spec new :: t
   def new, do: %Guesses{hits: MapSet.new(), misses: MapSet.new()}
 
@@ -55,7 +58,7 @@ defmodule Islands.Guesses do
 
   @doc """
   Returns a map assigning to :squares the list of square numbers
-  from the `guesses`'s hits.
+  from `guesses`'s hits.
   """
   @spec hit_squares(t) :: %{:squares => [Coord.square()]}
   def hit_squares(%Guesses{hits: hits} = _guesses) do
@@ -64,7 +67,7 @@ defmodule Islands.Guesses do
 
   @doc """
   Returns a map assigning to :squares the list of square numbers
-  from the `guesses`'s misses.
+  from `guesses`'s misses.
   """
   @spec miss_squares(t) :: %{:squares => [Coord.square()]}
   def miss_squares(%Guesses{misses: misses} = _guesses) do

@@ -48,7 +48,9 @@ defmodule Islands.GuessesTest do
 
   describe "Guesses.new/0" do
     test "returns a guesses struct" do
-      assert %Guesses{hits: _hits, misses: _misses} = Guesses.new()
+      assert %Guesses{hits: hits, misses: misses} = Guesses.new()
+      assert hits == MapSet.new()
+      assert misses == MapSet.new()
     end
   end
 
