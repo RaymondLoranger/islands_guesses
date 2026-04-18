@@ -57,7 +57,7 @@ defmodule Islands.Guesses do
   def add(_guesses, _type, _guess), do: {:error, :invalid_guesses_args}
 
   @doc """
-  Returns a map assigning to :squares the list of square numbers
+  Returns a map assigning to `:squares` the list of square numbers
   from `guesses`'s hits.
   """
   @spec hit_squares(t) :: %{:squares => [Coord.square()]}
@@ -66,7 +66,7 @@ defmodule Islands.Guesses do
   end
 
   @doc """
-  Returns a map assigning to :squares the list of square numbers
+  Returns a map assigning to `:squares` the list of square numbers
   from `guesses`'s misses.
   """
   @spec miss_squares(t) :: %{:squares => [Coord.square()]}
