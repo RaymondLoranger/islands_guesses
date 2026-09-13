@@ -43,7 +43,7 @@ defmodule Islands.Guesses do
   @doc """
   Adds a hit `guess` to the `:hits` set or a miss `guess` to the `:misses` set.
   """
-  @spec add(t, type, Coord.t()) :: t | {:error, atom}
+  @spec add(t, type, Coord.t()) :: t | {:error, :invalid_guesses_args}
   def add(guesses, type, guess)
 
   def add(%Guesses{} = guesses, :hit, %Coord{} = guess) do

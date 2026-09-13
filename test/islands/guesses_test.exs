@@ -55,7 +55,7 @@ defmodule Islands.GuessesTest do
   end
 
   describe "Guesses.add/3" do
-    test "adds new hits only ensuring uniqueness", %{coords: coords} do
+    test "adds new hits preserving uniqueness", %{coords: coords} do
       guesses =
         Guesses.new()
         |> Guesses.add(:hit, coords.one)
@@ -67,7 +67,7 @@ defmodule Islands.GuessesTest do
       assert MapSet.size(guesses.hits) == 2
     end
 
-    test "adds new misses only ensuring uniqueness", %{coords: coords} do
+    test "adds new misses preserving uniqueness", %{coords: coords} do
       guesses =
         Guesses.new()
         |> Guesses.add(:miss, coords.one)
@@ -79,7 +79,8 @@ defmodule Islands.GuessesTest do
       assert MapSet.size(guesses.misses) == 2
     end
 
-    test "returns {:error, reason} given bad args", %{coords: coords} do
+    test "returns {:error, :invalid_guesses_args} given bad args",
+         %{coords: coords} do
       assert Guesses.new() |> Guesses.add(:what, coords.one) ==
                {:error, :invalid_guesses_args}
 
